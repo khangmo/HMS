@@ -1,0 +1,396 @@
+<div class="main-header">
+    <a href="" class="logo">
+        <span class="logo-mini">CHIP</span>
+        <span class="logo-lg">CHIPPY NGUYEN</span>
+    </a>
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <fa-icon [icon]="'bars'"></fa-icon>
+        </a>
+        <!-- Navbar Top Menu -->
+        <div class="navbar-custom-menu" [ngSwitch]="isAuthenticated()">
+            <ul class="nav navbar-nav" id="header-menu-right">
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+                        <span>
+                            <fa-icon [icon]="'home'"></fa-icon>
+                            <span jhiTranslate="global.menu.home">Home</span>
+                        </span>
+                    </a>
+                </li>
+                <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                    <span>
+                        <fa-icon [icon]="'th-list'"></fa-icon>
+                        <span jhiTranslate="global.menu.entities.main">
+                            Entities
+                        </span>
+                    </span>
+                    </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li>
+                            <a class="dropdown-item" routerLink="city" routerLinkActive="active"
+                               [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.entities.city">City</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="district" routerLinkActive="active"
+                               [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.entities.district">District</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="street" routerLinkActive="active"
+                               [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.entities.street">Street</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="user-profile" routerLinkActive="active"
+                               [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.entities.userProfile">User Profile</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="accounts" routerLinkActive="active"
+                               [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.entities.accounts">Accounts</span>
+                            </a>
+                        </li>
+                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                    </ul>
+                </li>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer"
+                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
+                        <span>
+                            <fa-icon [icon]="'user-plus'"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.main">Administration</span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li>
+                            <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'user'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="admin/jhi-metrics" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'tachometer-alt'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="admin/jhi-health" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'heart'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.admin.health">Health</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="admin/jhi-configuration" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'list'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="admin/audits" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'bell'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.admin.audits">Audits</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'tasks'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.admin.logs">Logs</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li *ngIf="swaggerEnabled">
+                            <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'book'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.admin.apidocs">API</span>
+                            </a>
+                        </li>
+                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown pointer" *ngIf="languages && languages.length > 1">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
+                       id="languagesnavBarDropdown">
+                    <span>
+                        <fa-icon [icon]="'flag'"></fa-icon>
+                        <span jhiTranslate="global.menu.language">Language</span>
+                    </span>
+                    </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li *ngFor="let language of languages">
+                            <a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);"
+                               (click)="changeLanguage(language);collapseNavbar();">{{language |
+                                findLanguageFromKey}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+                  <span *ngIf="!getImageUrl()">
+                    <fa-icon [icon]="'user'"></fa-icon>
+                    <span jhiTranslate="global.menu.account.main">
+                      Account
+                    </span>
+                  </span>
+                        <span *ngIf="getImageUrl()">
+                      <img [src]="getImageUrl()" class="profile-image img-circle" alt="Avatar">
+                  </span>
+                    </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li *ngSwitchCase="true">
+                            <a class="dropdown-item" routerLink="settings" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'wrench'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.account.settings">Settings</span>
+                            </a>
+                        </li>
+                        <li class="divider" *ngSwitchCase="true"></li>
+                        <li *ngSwitchCase="true">
+                            <a class="dropdown-item" routerLink="password" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'clock'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.account.password">Password</span>
+                            </a>
+                        </li>
+                        <li class="divider" *ngSwitchCase="true"></li>
+                        <li *ngSwitchCase="true">
+                            <a class="dropdown-item" (click)="logout()" id="logout">
+                                <fa-icon [icon]="'sign-out-alt'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                            </a>
+                        </li>
+
+                        <li *ngSwitchCase="false">
+                            <a class="dropdown-item" (click)="login()" id="login">
+                                <fa-icon [icon]="'sign-in-alt'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.account.login">Sign in</span>
+                            </a>
+                        </li>
+                        <li class="divider" *ngSwitchCase="false"></li>
+                        <li *ngSwitchCase="false">
+                            <a class="dropdown-item" routerLink="register" routerLinkActive="active"
+                               (click)="collapseNavbar()">
+                                <fa-icon [icon]="'user-plus'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.account.register">Register</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <div *ngIf="account">
+                    <img [src]="'data:' + account.avatarContentType + ';base64,' + account.avatar" style="max-width: 45px; max-height: 45px; width: 100%; border-radius: 100%; border: 2px solid green;" alt="accounts image"/>
+                </div>
+            </div>
+            <div class="pull-left info">
+                <p>Chippy Nguyen</p>
+                <a href="#"><fa-icon [icon]="'cog'" class="text-green"></fa-icon> USER</a>
+            </div>
+        </div>
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                      <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="treeview active menu-open">
+                <a href="#">
+                    <fa-icon [icon]="'home'"></fa-icon> <span>Dashboard</span>
+                    <span class="pull-right-container">
+                      <fa-icon [icon]="'angle-left'" class="pull-right"></fa-icon>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                    <li class="active"><a href="index2.html"><fa-icon [icon]="'circle'"></fa-icon> Dashboard v2</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Layout Options</span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="pages/layout/top-nav.html"><fa-icon [icon]="'circle'"></fa-icon> Top Navigation</a></li>
+                    <li><a href="pages/layout/boxed.html"><fa-icon [icon]="'circle'"></fa-icon> Boxed</a></li>
+                    <li><a href="pages/layout/fixed.html"><fa-icon [icon]="'circle'"></fa-icon> Fixed</a></li>
+                    <li><a href="pages/layout/collapsed-sidebar.html"><fa-icon [icon]="'circle'"></fa-icon> Collapsed
+                        Sidebar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/widgets.html">
+                    <i class="fa fa-th"></i> <span>Widgets</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>Charts</span>
+                    <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="pages/charts/chartjs.html"><fa-icon [icon]="'circle'"></fa-icon> ChartJS</a></li>
+                    <li><a href="pages/charts/morris.html"><fa-icon [icon]="'circle'"></fa-icon> Morris</a></li>
+                    <li><a href="pages/charts/flot.html"><fa-icon [icon]="'circle'"></fa-icon> Flot</a></li>
+                    <li><a href="pages/charts/inline.html"><fa-icon [icon]="'circle'"></fa-icon> Inline charts</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-laptop"></i>
+                    <span>UI Elements</span>
+                    <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="pages/UI/general.html"><fa-icon [icon]="'circle'"></fa-icon> General</a></li>
+                    <li><a href="pages/UI/icons.html"><fa-icon [icon]="'circle'"></fa-icon> Icons</a></li>
+                    <li><a href="pages/UI/buttons.html"><fa-icon [icon]="'circle'"></fa-icon> Buttons</a></li>
+                    <li><a href="pages/UI/sliders.html"><fa-icon [icon]="'circle'"></fa-icon> Sliders</a></li>
+                    <li><a href="pages/UI/timeline.html"><fa-icon [icon]="'circle'"></fa-icon> Timeline</a></li>
+                    <li><a href="pages/UI/modals.html"><fa-icon [icon]="'circle'"></fa-icon> Modals</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Forms</span>
+                    <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="pages/forms/general.html"><fa-icon [icon]="'circle'"></fa-icon> General Elements</a></li>
+                    <li><a href="pages/forms/advanced.html"><fa-icon [icon]="'circle'"></fa-icon> Advanced Elements</a>
+                    </li>
+                    <li><a href="pages/forms/editors.html"><fa-icon [icon]="'circle'"></fa-icon> Editors</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-table"></i> <span>Tables</span>
+                    <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="pages/tables/simple.html"><fa-icon [icon]="'circle'"></fa-icon> Simple tables</a></li>
+                    <li><a href="pages/tables/data.html"><fa-icon [icon]="'circle'"></fa-icon> Data tables</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/calendar.html">
+                    <i class="fa fa-calendar"></i> <span>Calendar</span>
+                </a>
+            </li>
+            <li>
+                <a href="pages/mailbox/mailbox.html">
+                    <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-folder"></i> <span>Examples</span>
+                    <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="pages/examples/invoice.html"><fa-icon [icon]="'circle'"></fa-icon> Invoice</a></li>
+                    <li><a href="pages/examples/profile.html"><fa-icon [icon]="'circle'"></fa-icon> Profile</a></li>
+                    <li><a href="pages/examples/login.html"><fa-icon [icon]="'circle'"></fa-icon> Login</a></li>
+                    <li><a href="pages/examples/register.html"><fa-icon [icon]="'circle'"></fa-icon> Register</a></li>
+                    <li><a href="pages/examples/lockscreen.html"><fa-icon [icon]="'circle'"></fa-icon> Lockscreen</a></li>
+                    <li><a href="pages/examples/404.html"><fa-icon [icon]="'circle'"></fa-icon> 404 Error</a></li>
+                    <li><a href="pages/examples/500.html"><fa-icon [icon]="'circle'"></fa-icon> 500 Error</a></li>
+                    <li><a href="pages/examples/blank.html"><fa-icon [icon]="'circle'"></fa-icon> Blank Page</a></li>
+                    <li><a href="pages/examples/pace.html"><fa-icon [icon]="'circle'"></fa-icon> Pace Page</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-share"></i> <span>Multilevel</span>
+                    <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><fa-icon [icon]="'circle'"></fa-icon> Level One</a></li>
+                    <li class="treeview">
+                        <a href="#"><fa-icon [icon]="'circle'"></fa-icon> Level One
+                            <span class="pull-right-container">
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><fa-icon [icon]="'circle'"></fa-icon> Level Two</a></li>
+                            <li class="treeview">
+                                <a href="#"><fa-icon [icon]="'circle'"></fa-icon> Level Two
+                                    <span class="pull-right-container">
+                                          <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><fa-icon [icon]="'circle'"></fa-icon> Level Three</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                </ul>
+            </li>
+            <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+            <li class="header">LABELS</li>
+            <li><a href="#"><fa-icon [icon]="'circle-notch'" class="text-red"></fa-icon> <span>Important</span></a></li>
+            <li><a href="#"><fa-icon [icon]="'circle'" class="text-yellow"></fa-icon> <span>Warning</span></a></li>
+            <li><a href="#"><fa-icon [icon]="'circle'" class="text-aqua"></fa-icon> <span>Information</span></a></li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

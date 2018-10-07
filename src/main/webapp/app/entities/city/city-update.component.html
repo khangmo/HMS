@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-city-heading" jhiTranslate="lawerApp.city.home.createOrEditLabel">Create or edit a City</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!city.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="city.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.city.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="city.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.city.enabled" for="field_enabled">Enabled</label>
+                    <input type="checkbox" class="form-control" name="enabled" id="field_enabled"
+                        [(ngModel)]="city.enabled" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.city.createAt" for="field_createAt">Create At</label>
+                    <div class="input-group">
+                        <input id="field_createAt" type="text" class="form-control" name="createAt" ngbDatepicker  #createAtDp="ngbDatepicker" [(ngModel)]="city.createAt"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createAtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.city.updateAt" for="field_updateAt">Update At</label>
+                    <div class="input-group">
+                        <input id="field_updateAt" type="text" class="form-control" name="updateAt" ngbDatepicker  #updateAtDp="ngbDatepicker" [(ngModel)]="city.updateAt"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="updateAtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

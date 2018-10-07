@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-accounts-heading" jhiTranslate="lawerApp.accounts.home.createOrEditLabel">Create or edit a Accounts</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!accounts.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="accounts.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.login" for="field_login">Login</label>
+                    <input type="text" class="form-control" name="login" id="field_login"
+                        [(ngModel)]="accounts.login" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="accounts.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="accounts.email" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.activated" for="field_activated">Activated</label>
+                    <input type="checkbox" class="form-control" name="activated" id="field_activated"
+                        [(ngModel)]="accounts.activated" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.langKey" for="field_langKey">Lang Key</label>
+                    <input type="text" class="form-control" name="langKey" id="field_langKey"
+                        [(ngModel)]="accounts.langKey" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.avatar" for="field_avatar">Avatar</label>
+                    <div>
+                        <img [src]="'data:' + accounts.avatarContentType + ';base64,' + accounts.avatar" style="max-height: 100px;" *ngIf="accounts.avatar" alt="accounts image"/>
+                        <div *ngIf="accounts.avatar" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{accounts.avatarContentType}}, {{byteSize(accounts.avatar)}}</span>
+                            <button type="button" (click)="clearInputImage('avatar', 'avatarContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_avatar" (change)="setFileData($event, accounts, 'avatar', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="avatar" id="field_avatar"
+                        [(ngModel)]="accounts.avatar" />
+                    <input type="hidden" class="form-control" name="avatarContentType" id="field_avatarContentType"
+                        [(ngModel)]="accounts.avatarContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                        [(ngModel)]="accounts.createdBy" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="input-group">
+                        <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker  #createdDateDp="ngbDatepicker" [(ngModel)]="accounts.createdDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                    <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                        [(ngModel)]="accounts.lastModifiedBy" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                    <div class="input-group">
+                        <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" ngbDatepicker  #lastModifiedDateDp="ngbDatepicker" [(ngModel)]="accounts.lastModifiedDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="lastModifiedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lawerApp.accounts.password" for="field_password">Password</label>
+                    <input type="text" class="form-control" name="password" id="field_password" [(ngModel)]="accounts.password" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

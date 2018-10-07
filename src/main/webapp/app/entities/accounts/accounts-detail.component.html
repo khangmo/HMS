@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accounts">
+            <h2><span jhiTranslate="lawerApp.accounts.detail.title">Accounts</span> {{accounts.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="lawerApp.accounts.login">Login</span></dt>
+                <dd>
+                    <span>{{accounts.login}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.name">Name</span></dt>
+                <dd>
+                    <span>{{accounts.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.email">Email</span></dt>
+                <dd>
+                    <span>{{accounts.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.activated">Activated</span></dt>
+                <dd>
+                    <span>{{accounts.activated}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.langKey">Lang Key</span></dt>
+                <dd>
+                    <span>{{accounts.langKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.avatar">Avatar</span></dt>
+                <dd>
+                    <div *ngIf="accounts.avatar">
+                        <a (click)="openFile(accounts.avatarContentType, accounts.avatar)">
+                            <img [src]="'data:' + accounts.avatarContentType + ';base64,' + accounts.avatar" style="max-width: 100%;" alt="accounts image"/>
+                        </a>
+                        {{accounts.avatarContentType}}, {{byteSize(accounts.avatar)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{accounts.createdBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{accounts.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{accounts.lastModifiedBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{accounts.lastModifiedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.accounts.password">Password</span></dt>
+                <dd>
+                    <span>{{accounts.password}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/accounts', accounts.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

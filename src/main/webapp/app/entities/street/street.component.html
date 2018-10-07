@@ -1,0 +1,66 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="lawerApp.street.home.title">Streets</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-street" [routerLink]="['/street/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="lawerApp.street.home.createLabel">
+            Create new Street
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="streets">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="lawerApp.street.name">Name</span></th>
+            <th><span jhiTranslate="lawerApp.street.enabled">Enabled</span></th>
+            <th><span jhiTranslate="lawerApp.street.createAt">Create At</span></th>
+            <th><span jhiTranslate="lawerApp.street.updateAt">Update At</span></th>
+            <th><span jhiTranslate="lawerApp.street.district">District</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let street of streets ;trackBy: trackId">
+                <td><a [routerLink]="['/street', street.id, 'view' ]">{{street.id}}</a></td>
+                <td>{{street.name}}</td>
+                <td>{{street.enabled}}</td>
+                <td>{{street.createAt | date:'mediumDate'}}</td>
+                <td>{{street.updateAt | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="street.district">
+                        <a [routerLink]="['../district', street.district?.id, 'view' ]" >{{street.district?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/street', street.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/street', street.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'street/'+ street.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+
+{
+    "lawerApp": {
+        "userProfile" : {
+            "home": {
+                "title": "UserProfiles",
+                "createLabel": "User Profile を追加",
+                "createOrEditLabel": "User Profileを追加または編集"
+            },
+            "created": "A new User Profile is created with identifier {{ param }}",
+            "updated": "A User Profile is updated with identifier {{ param }}",
+            "deleted": "A User Profile is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "User Profile {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "User Profile"
+            },
+            "avatar": "Avatar",
+            "address": "Address",
+            "user": "User"
+        }
+    }
+}

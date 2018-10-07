@@ -1,0 +1,49 @@
+entity City {
+   name String,
+   enabled Boolean,
+   createAt LocalDate,
+   updateAt LocalDate
+}
+
+entity District {
+   name String,
+   enabled Boolean,
+   createAt LocalDate,
+   updateAt LocalDate
+}
+
+entity Street {
+   name String,
+   enabled Boolean,
+   createAt LocalDate,
+   updateAt LocalDate
+}
+
+relationship OneToMany {
+   City{city(name)} to District
+   District{district(name)} to Street
+}
+
+entity UserProfile {
+   avatar ImageBlob,
+   address String
+}
+
+relationship ManyToOne {
+   UserProfile{user(email)} to User
+}
+
+entity Accounts {
+   login String,
+   name String,
+   email String,
+   activated Boolean,
+   langKey String,
+   avatar ImageBlob,
+   createdBy String,
+   createdDate LocalDate,
+   lastModifiedBy String,
+   lastModifiedDate LocalDate,
+   password String
+}
+

@@ -1,0 +1,27 @@
+
+{
+    "lawerApp": {
+        "district" : {
+            "home": {
+                "title": "Districts",
+                "createLabel": "District を追加",
+                "createOrEditLabel": "Districtを追加または編集"
+            },
+            "created": "A new District is created with identifier {{ param }}",
+            "updated": "A District is updated with identifier {{ param }}",
+            "deleted": "A District is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "District {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "District"
+            },
+            "name": "Name",
+            "enabled": "Enabled",
+            "createAt": "Create At",
+            "updateAt": "Update At",
+            "city": "City",
+            "district": "District"
+        }
+    }
+}

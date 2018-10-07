@@ -1,0 +1,32 @@
+
+{
+    "lawerApp": {
+        "accounts" : {
+            "home": {
+                "title": "Accounts",
+                "createLabel": "Accounts を追加",
+                "createOrEditLabel": "Accountsを追加または編集"
+            },
+            "created": "A new Accounts is created with identifier {{ param }}",
+            "updated": "A Accounts is updated with identifier {{ param }}",
+            "deleted": "A Accounts is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Accounts {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Accounts"
+            },
+            "login": "Login",
+            "name": "Name",
+            "email": "Email",
+            "activated": "Activated",
+            "langKey": "Lang Key",
+            "avatar": "Avatar",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "password": "Password"
+        }
+    }
+}

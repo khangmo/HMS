@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="city">
+            <h2><span jhiTranslate="lawerApp.city.detail.title">City</span> {{city.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="lawerApp.city.name">Name</span></dt>
+                <dd>
+                    <span>{{city.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.city.enabled">Enabled</span></dt>
+                <dd>
+                    <span>{{city.enabled}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.city.createAt">Create At</span></dt>
+                <dd>
+                    <span>{{city.createAt}}</span>
+                </dd>
+                <dt><span jhiTranslate="lawerApp.city.updateAt">Update At</span></dt>
+                <dd>
+                    <span>{{city.updateAt}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/city', city.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
